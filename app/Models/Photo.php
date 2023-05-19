@@ -11,14 +11,14 @@ class Photo extends Model
     protected $fillable = ['photo', 'hotel_id'];
     public $timestamps = false;
 
-    public static function add(UploadedFile $gallery, int $cat_id)
+    public static function add(UploadedFile $gallery, int $hotel_id)
     {
         $name = $gallery->getClientOriginalName();
         $name = rand(1000000, 9999999) . '-' . $name;
         $path = public_path() . '/hotels-photo/';
         $gallery->move($path, $name);
         self::create([
-            'cat_id' => $cat_id,
+            'hotel_id' => $hotel_id,
             'photo' => $name
         ]);
     }

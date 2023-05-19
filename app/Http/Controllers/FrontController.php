@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Models\Country;
 
-// use App\Models\Order;
+use App\Models\Order;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -188,36 +188,36 @@ class FrontController extends Controller
         ]);
     }
 
-    // public function orders(Request $request)
-    // {
-    //     $orders = $request->user()->order;
+    public function orders(Request $request)
+    {
+        $orders = $request->user()->order;
 
-    //     return view('front.orders', [
-    //         'orders' => $orders,
-    //         'status' => Order::STATUS
-    //     ]);
-    // }
+        return view('front.orders', [
+            'orders' => $orders,
+            'status' => Order::STATUS
+        ]);
+    }
 
-    // public function download(Order $order)
-    // {
+    public function download(Order $order)
+    {
 
 
-    //     $hotelNames = array_map(fn($p) => $p['title'], $order->hotels);
+        $hotelNames = array_map(fn($p) => $p['title'], $order->hotels);
 
-    //     $hotels = Hotel::whereIn('title', $hotelNames)->get();
+        $hotels = Hotel::whereIn('title', $hotelNames)->get();
 
-        // return view('front.pdf',[
-        //         'order' => $order,
-        //         'hotels' => $hotels,
-        // ]);
+        return view('front.pdf',[
+                'order' => $order,
+                'hotels' => $hotels,
+        ]);
 
-    //     $pdf = Pdf::loadView('front.pdf',[
-    //         'order' => $order,
-    //         'hotels' => $hotels,
-    //     ]);
+        $pdf = Pdf::loadView('front.pdf',[
+            'order' => $order,
+            'hotels' => $hotels,
+        ]);
 
-    //     return $pdf->download('order-'.$order->id.'.pdf');
-    // }
+        return $pdf->download('order-'.$order->id.'.pdf');
+    }
 
     // public function vote(Request $request, Hotel $hotel)
     // {

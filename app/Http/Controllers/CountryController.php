@@ -34,37 +34,14 @@ class CountryController extends Controller
 
     public function store(Request $request)
     {
-        
-
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|min:3|max:100',
-            'season' => 'required|min:3|max:100',
-            'photo' => 'sometimes|required|image|max:512',
-            'gallery.*' => 'sometimes|required|image|max:512'
-        ]);
-
-        if ($validator->fails()) {
-            $request->flash();
-            return redirect()
-                ->back()
-                ->withErrors($validator);
-        }
-        
-        $photo = $request->photo;
-        if ($photo) {
-            $name = $country->savePhoto($photo);
-        }
         $id = Country::create([
             'title' => $request->title,
-            'season' => $request->season,
-            'photo' => $name ?? null
+            'season' => $request->season
+            
         ])->id;
-
-        foreach ($request->gallery ?? [] as $gallery) {
-            Photo::add($gallery, $id);
-        }
-
+    
         return redirect()->route('countries-index');
+
     }
 
 
@@ -78,32 +55,11 @@ class CountryController extends Controller
 
     public function update(Request $request, Country $country)
     {
-        
-        if ($request->delete == 1) {
-            $country->deletePhoto();
-            return redirect()->back();
-        }
-
-        $photo = $request->photo;
-
-        if ($photo) {
-            $name = $country->savePhoto($photo);
-            $country->deletePhoto();
-            $country->update([
-                'title' => $request->title,
-                'colors_count' => $request->colors_count,
-                'photo' => $name
-            ]);
-        } else {
-            $country->update([
-                'title' => $request->title,
-                'colors_count' => $request->colors_count,
-            ]);
-        }
-
-        foreach ($request->gallery ?? [] as $gallery) {
-            Photo::add($gallery, $country->id);
-        }
+        $country->update([
+            'title' => $request->title,
+            'season' => $request->season,
+            'country_id' =>$request->country_id
+        ]);
 
         return redirect()->route('countries-index');
     }

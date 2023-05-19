@@ -14,11 +14,7 @@
                 <div class="card-body">
                     <ul class="list-group">
                         <div class="one-hotel">
-                            <div class="one-hotel-colors">
-                                @foreach($hotel->color as $color)
-                                <div class="color" style="background-color:{{$color->hex}};">{{$color->title}}</div>
-                                @endforeach
-                            </div>
+
                             <div class="hotel-info">
                                 <div class="buy">
                                     <span>{{$hotel->price}} eur</span>

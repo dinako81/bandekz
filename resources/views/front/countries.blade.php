@@ -1,6 +1,6 @@
 <div class="card mt-5">
     <div class="card-header">
-        <h2>Categories</h2>
+        <h2>Countries</h2>
     </div>
     <div class="card-body">
         <ul class="list-group">
