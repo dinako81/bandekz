@@ -22,11 +22,7 @@
                                         @endif
                                     </div>
                                     <h2>{{$hotel->title}}</h2>
-                                    <div class="hotel-colors-count">
-                                        @for($i = 0; $i < $hotel->colors_count; $i++)
-                                            <div class="--random--color"></div>
-                                            @endfor
-                                    </div>
+
                                 </div>
                                 <div class="buttons">
                                     <a href="{{route('hotels-edit', $hotel)}}" class="btn btn-outline-success">Edit</a>

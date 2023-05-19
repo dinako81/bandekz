@@ -30,14 +30,14 @@
 </body>
 
 <table>
-    @foreach($products as $product)
+    @foreach($hotels as $hotel)
     <tr>
-        @foreach($product->color as $color)
+        @foreach($hotel->color as $color)
         <td style="background-color:{{$color->hex}};">
             {{$color->title}}
         </td>
         @endforeach
-        {!!str_repeat('<td></td>', 5 - $product->color->count())!!}
+        {!!str_repeat('<td></td>', 5 - $hotel->color->count())!!}
     </tr>
     @endforeach
 
