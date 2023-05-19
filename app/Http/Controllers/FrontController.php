@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\Hotel;
 use App\Models\Country;
 
 // use App\Models\Order;
@@ -14,9 +14,9 @@ class FrontController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Hotel::all();
+        $hotels = Hotel::all();
 
-        $products->map(function($p) use ($request) {
+        $hotels->map(function($p) use ($request) {
 
             // //VOTES
             // if (!$request->user()) {
@@ -29,7 +29,7 @@ class FrontController extends Controller
             // $p->showVoteButton = $showVoteButton;
 
             // // TAGS
-            // $tagsId = $p->productTag->pluck('tag_id')->all();
+            // $tagsId = $p->hotelTag->pluck('tag_id')->all();
             // $tags = Tag::whereIn('id', $tagsId)->get();
             // $p->tags = $tags;
 
@@ -62,7 +62,7 @@ class FrontController extends Controller
     //     ]);
     // }
 
-    // public function addNewTag(Request $request, Product $product)
+    // public function addNewTag(Request $request, Hotel $hotel)
     // {
     //     $title = $request->tag ?? '';
 
@@ -83,7 +83,7 @@ class FrontController extends Controller
     //     }
 
 
-    //     $tagsId = $product->productTag->pluck('tag_id')->all();
+    //     $tagsId = $hotel->hotelTag->pluck('tag_id')->all();
         
     //     if (in_array($tag->id, $tagsId)) {
     //         return response()->json([
@@ -92,9 +92,9 @@ class FrontController extends Controller
     //         ]);
     //     }
 
-    //     ProductTag::create([
+    //     HotelTag::create([
     //         'tag_id' => $tag->id,
-    //         'product_id' => $product->id
+    //         'hotel_id' => $hotel->id
     //     ]);
 
 
@@ -108,7 +108,7 @@ class FrontController extends Controller
 
     // }
 
-    // public function deleteTag(Request $request, Product $product)
+    // public function deleteTag(Request $request, Hotel $hotel)
     // {
     //     $tagId = $request->tag ?? 0;
 
@@ -121,10 +121,10 @@ class FrontController extends Controller
     //         ]);
     //     }
 
-    //     $productTag = ProductTag::where('product_id', $product->id)
+    //     $hotelTag = HotelTag::where('hotel_id', $hotel->id)
     //     ->where('tag_id', $tag->id)->first();
 
-    //     $productTag->delete();
+    //     $hotelTag->delete();
     //     return response()->json([
     //         'message' => 'Tag removed',
     //         'status' => 'ok',
@@ -135,7 +135,7 @@ class FrontController extends Controller
 
     // }
 
-    // public function addTag(Request $request, Product $product)
+    // public function addTag(Request $request, Potel $hotel)
     // {
     //     $tagId = $request->tag ?? 0;
 
@@ -148,7 +148,7 @@ class FrontController extends Controller
     //         ]);
     //     }
 
-    //     $tagsId = $product->productTag->pluck('tag_id')->all();
+    //     $tagsId = $hotel->hotelTag->pluck('tag_id')->all();
         
     //     if (in_array($tagId, $tagsId)) {
     //         return response()->json([
@@ -157,9 +157,9 @@ class FrontController extends Controller
     //         ]);
     //     }
 
-    //     ProductTag::create([
+    //     HotelTag::create([
     //         'tag_id' => $tagId,
-    //         'product_id' => $product->id
+    //         'hotel_id' => $hotel->id
     //     ]);
 
 
@@ -173,10 +173,10 @@ class FrontController extends Controller
 
     // public function catColors(Cat $cat)
     // {
-    //     $products = $cat->product;
+    //     $hotels = $cat->hotel;
 
     //     return view('front.cat-index', [
-    //         'products' => $products,
+    //         'hotels' => $hotels,
     //         'cat' => $cat
     //     ]);
     // }
@@ -202,28 +202,28 @@ class FrontController extends Controller
     // {
 
 
-    //     $productNames = array_map(fn($p) => $p['title'], $order->products);
+    //     $hotelNames = array_map(fn($p) => $p['title'], $order->hotels);
 
-    //     $products = Product::whereIn('title', $productNames)->get();
+    //     $hotels = Hotel::whereIn('title', $hotelNames)->get();
 
         // return view('front.pdf',[
         //         'order' => $order,
-        //         'products' => $products,
+        //         'hotels' => $hotels,
         // ]);
 
     //     $pdf = Pdf::loadView('front.pdf',[
     //         'order' => $order,
-    //         'products' => $products,
+    //         'hotels' => $hotels,
     //     ]);
 
     //     return $pdf->download('order-'.$order->id.'.pdf');
     // }
 
-    // public function vote(Request $request, Product $product)
+    // public function vote(Request $request, Hotel $hotel)
     // {
     //     if ($request->user()) {
     //         $userId = $request->user()->id;
-    //         $rates = collect($product->rates);
+    //         $rates = collect($hotel->rates);
 
     //         if (!$rates->first(fn($r) => $r['userId'] == $userId) && $request->star) {
     //             $stars = count($request->star);
@@ -234,7 +234,7 @@ class FrontController extends Controller
     //             $rates->add($userRate);
     //             $rate = round($rates->sum('rate') / $rates->count(), 2);
 
-    //             $product->update([
+    //             $hotel->update([
     //                 'rate' => $rate,
     //                 'rates' => $rates,
     //             ]);
