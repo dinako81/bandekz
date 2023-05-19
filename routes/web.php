@@ -35,29 +35,29 @@ Route::name('front-')->group(function () {
 
 Route::prefix('countries')->name('countries-')->group(function () {
 
-    Route::get('/', [S::class, 'index'])->name('index');
-    Route::get('/create', [S::class, 'create'])->name('create')->middleware('role:admin|client');
-    Route::post('/create', [S::class, 'store'])->name('store')->middleware('role:admin|client');
-    Route::get('/{country}', [S::class, 'show'])->name('show')->middleware('role:admin|client');
-    Route::get('/edit/{country}', [S::class, 'edit'])->name('edit')->middleware('role:admin|client');
-    Route::put('/edit/{country}', [S::class, 'update'])->name('update')->middleware('role:admin|client');
-    Route::delete('/delete/{country}', [S::class, 'destroy'])->name('delete')->middleware('role:admin|client');
-    Route::get('/funds/{country}', [S::class, 'editamount'])->name('editamoun')->middleware('role:admin|client');
-    Route::put('/funds/{country}', [S::class, 'donateamount'])->name('donateamount')->middleware('role:admin|client');
-    Route::delete('/delete-photo/{photo}', [S::class, 'destroyPhoto'])->name('delete-photo')->middleware('role:admin|client');
+    Route::get('/', [C::class, 'index'])->name('index');
+    Route::get('/create', [C::class, 'create'])->name('create')->middleware('role:admin|client');
+    Route::post('/create', [C::class, 'store'])->name('store')->middleware('role:admin|client');
+    Route::get('/{country}', [C::class, 'show'])->name('show')->middleware('role:admin|client');
+    Route::get('/edit/{country}', [C::class, 'edit'])->name('edit')->middleware('role:admin|client');
+    Route::put('/edit/{country}', [C::class, 'update'])->name('update')->middleware('role:admin|client');
+    Route::delete('/delete/{country}', [C::class, 'destroy'])->name('delete')->middleware('role:admin|client');
+    Route::get('/funds/{country}', [C::class, 'editamount'])->name('editamoun')->middleware('role:admin|client');
+    Route::put('/funds/{country}', [C::class, 'donateamount'])->name('donateamount')->middleware('role:admin|client');
+    Route::delete('/delete-photo/{photo}', [C::class, 'destroyPhoto'])->name('delete-photo')->middleware('role:admin|client');
    
 });
 
 Route::prefix('hotels')->name('hotels-')->group(function () {
-  Route::get('/', [P::class, 'index'])->name('index')->middleware('role:admin|client');
-  Route::get('/colors', [P::class, 'colors'])->name('colors')->middleware('role:admin');
-  Route::get('/color-name', [P::class, 'colorName'])->name('color-name')->middleware('role:admin');
-  Route::get('/create', [P::class, 'create'])->name('create')->middleware('role:admin');
-  Route::post('/create', [P::class, 'store'])->name('store')->middleware('role:admin');
-  Route::get('/{hotel}', [P::class, 'show'])->name('show')->middleware('role:admin');
-  Route::get('/edit/{hotel}', [P::class, 'edit'])->name('edit')->middleware('role:admin');
-  Route::put('/edit/{hotel}', [P::class, 'update'])->name('update')->middleware('role:admin');
-  Route::delete('/delete/{hotel}', [P::class, 'destroy'])->name('delete')->middleware('role:admin');
+  Route::get('/', [H::class, 'index'])->name('index')->middleware('role:admin|client');
+  // Route::get('/colors', [H::class, 'colors'])->name('colors')->middleware('role:admin');
+  // Route::get('/color-name', [H::class, 'colorName'])->name('color-name')->middleware('role:admin');
+  Route::get('/create', [H::class, 'create'])->name('create')->middleware('role:admin');
+  Route::post('/create', [H::class, 'store'])->name('store')->middleware('role:admin');
+  Route::get('/{hotel}', [H::class, 'show'])->name('show')->middleware('role:admin');
+  Route::get('/edit/{hotel}', [H::class, 'edit'])->name('edit')->middleware('role:admin');
+  Route::put('/edit/{hotel}', [H::class, 'update'])->name('update')->middleware('role:admin');
+  Route::delete('/delete/{hotel}', [H::class, 'destroy'])->name('delete')->middleware('role:admin');
 });
 
 Route::prefix('cart')->name('cart-')->group(function () {
@@ -69,6 +69,15 @@ Route::prefix('cart')->name('cart-')->group(function () {
   Route::get('/mini-cart', [CART::class, 'miniCart'])->name('mini-cart');
 });
 
+Route::prefix('orders')->name('orders-')->group(function () {
+  Route::get('/', [O::class, 'index'])->name('index')->middleware('role:admin');
+  Route::put('/status/{order}', [O::class, 'update'])->name('update')->middleware('role:admin');
+  // Route::get('/create', [C::class, 'create'])->name('create')->middleware('role:admin');
+  // Route::post('/create', [C::class, 'store'])->name('store')->middleware('role:admin');
+  // Route::get('/edit/{cat}', [C::class, 'edit'])->name('edit')->middleware('role:admin');
+  // Route::put('/edit/{cat}', [C::class, 'update'])->name('update')->middleware('role:admin');
+  // Route::delete('/delete/{cat}', [C::class, 'destroy'])->name('delete')->middleware('role:admin');
+});
 
 Auth::routes();
 

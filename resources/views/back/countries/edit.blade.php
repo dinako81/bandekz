@@ -6,14 +6,14 @@
         <div class="col-8">
             <div class="card mt-5">
                 <div class="card-header">
-                    <h1>Edit Country</h1>
+                    <h1>Add Country</h1>
                 </div>
                 <div class="card-body">
                     <form action="{{route('countries-store')}}" method="post" enctype="multipart/form-data">
                         <div class="col-9">
                             <div class="mb-3">
                                 <label class="form-label">Country title</label>
-                                <input type="text" class="form-control" name="title" value={{old('title')}}>
+                                <input type="text" class="form-control" name="title" value={{old('title', $country->title)}}>
                                 <div class="form-text">Please add country title here</div>
                             </div>
                         </div>
@@ -21,7 +21,7 @@
                         <div class="col-9">
                             <div class="mb-3">
                                 <label class="form-label">Country season</label>
-                                <input type="text" class="form-control" name="season" value={{old('season')}}>
+                                <input type="text" class="form-control" name="season" value={{old('season', $country->season)}}>
                                 <div class="form-text">Please add country season</div>
                             </div>
                         </div>

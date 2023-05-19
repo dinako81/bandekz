@@ -56,7 +56,7 @@ class CountryController extends Controller
         }
         $id = Country::create([
             'title' => $request->title,
-            'season' => $request->title,
+            'season' => $request->season,
             'photo' => $name ?? null
         ])->id;
 
