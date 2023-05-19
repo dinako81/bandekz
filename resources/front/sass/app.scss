@@ -1,0 +1,139 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+
+body {
+    background-image: url('../../back/images/images.jpg');
+    background-size:contain;
+    background-repeat:round;
+  }
+
+.stories-list {
+    .story {
+
+        .story-info  {
+            justify-content: space-between;
+            align-items: left;
+            padding: 20px;
+            h2{
+                text-transform: uppercase;
+                font-weight: bolder;
+            }
+        }
+        .photo {
+            margin: 0 10px;
+            img {
+                height: 100px;
+                width: auto;
+            }
+        }
+       .story-amount  {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            padding: 10px;
+       
+            span{
+                display: inline;
+                color: orangered;
+                font-size: 22px;
+                padding-left: 20px;
+            }
+            .buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+    }
+}
+
+
+}
+
+[data-gallery="0"] {
+    display: none;
+}
+
+span.rem {
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid crimson;
+    background-color: crimson;
+    border-radius: 50%;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+}
+       
+.gallery {
+    img {
+        width: 300px;
+        height: auto;
+    }    
+        
+}
+.stars {
+    padding: 20px 0 0 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    [type=checkbox]+.star {
+        position: relative;
+        font-size: 30px;
+        color: crimson;
+        cursor: pointer;
+        user-select: none;
+        width: 25px;
+        &:after {
+            position: absolute;
+            content: '\1F90D'
+        }
+    }
+    [type=checkbox]:checked+.star {
+        &:after {
+            position: absolute;
+            content: '\1F90E'
+        }
+    }
+    [type=checkbox]+.star.half {
+        width: 25px;
+        &:before {
+            content: '\1F90E';
+            position: absolute;
+        }
+        &:after {
+            content: '\1F90D';
+            position: absolute;
+            width: 12px;
+            overflow: hidden;
+        }
+    }
+    [type=checkbox] {
+        display: none;
+    }
+    .result {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 0 16px;
+        position: relative;
+        top: 26px;
+        span {
+            font-size: 14px;
+            font-weight: normal;
+        }
+    }
+    .btn {
+        position: relative;
+        top: 26px;
+    }
+}
