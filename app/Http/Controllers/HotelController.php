@@ -59,11 +59,12 @@ class HotelController extends Controller
 
     public function store(Request $request)
     {
-            $validator = Validator::make($request->all(), [
+        
+        $validator = Validator::make($request->all(), [
             'title' => 'required|min:3|max:100',
-            'price' => 'required|min:3|max:100',
+            'price' => 'required',
+            'duration' => 'required',
             'photo' => 'sometimes|required|image|max:512',
-            'duration' => 'required|min:3|max:100',
             'gallery.*' => 'sometimes|required|image|max:512'
         ]);
 
@@ -76,13 +77,12 @@ class HotelController extends Controller
         
         $photo = $request->photo;
         if ($photo) {
-            $name = $country->savePhoto($photo);
+            $name = $hotel->savePhoto($photo);
         }
         $id = Hotel::create([
             'title' => $request->title,
-            'price' => $request->price,
-            'duration' => $request->duration,
-            'country_id' =>$request->country_id,
+            'price'=> $request->price,
+            'duration'=> $request->duration,
             'photo' => $name ?? null
         ])->id;
 
@@ -91,21 +91,7 @@ class HotelController extends Controller
         }
 
         return redirect()->route('hotels-index');
-
-
-  
-
-        // foreach ( $request->color as $index => $color) {
-        //     Color::create([
-        //         'title' => $request->name[$index],
-        //         'hex' => $color,
-        //         'hotel_id' => $id
-        //     ]);
-        // }
-
-        return redirect()->route('hotels-index');
     }
-
 
     public function show(Hotel $hotel)
     {

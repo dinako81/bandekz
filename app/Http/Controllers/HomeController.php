@@ -26,6 +26,6 @@ class HomeController extends Controller
         if ($request->user()->role > 5) {
             return redirect()->route('front-index');
         }
-        return redirect()->route('cats-index');
+        return redirect()->route('countries-index');
     }
 }

@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Hotel;
+use App\Models\Photo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class Hotel extends Model
 {
