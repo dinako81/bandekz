@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-6">
             <div class="card mt-5">
                 <div class="card-header">
                     <h1>Edit Hotel</h1>
@@ -14,6 +14,28 @@
                             <label class="form-label">Hotel title</label>
                             <input type="text" class="form-control" name="title" value="{{old('title', $hotel->title)}}">
                             <div class="form-text">Please add hotel title here</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Hotel price</label>
+                            <input type="text" class="form-control" name="price" value={{old('price', $hotel->price)}}>
+                            <div class="form-text">Please add hotel price here</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Holiday duration</label>
+                            <input type="text" class="form-control" name="duration" value={{old('duration', $hotel->duration)}}>
+                            <div class="form-text">Please add holiday duration here</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Country</label>
+                            <select class="form-select" name="country_id">
+                                @foreach($countries as $country)
+                                <option value="{{ $country->id }}" {{ old('country_id') == $country->id ? 'selected' : '' }}>
+                                    {{ $country->title }} {{ $country->season }}
+                                </option>
+                                @endforeach
+                            </select>
+                            <div class="form-text">Please select country</div>
                         </div>
 
                         <div class="mb-3">

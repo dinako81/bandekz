@@ -45,7 +45,7 @@ class HotelController extends Controller
 
     
 
-    public function store(Request $request)
+    public function store(Request $request, Hotel $hotel)
     {
 
         $validator = Validator::make($request->all(), [
@@ -139,7 +139,27 @@ class HotelController extends Controller
 
     public function destroy(Hotel $hotel)
     {
+        if ($hotel->gallery->count()) {
+            foreach ($hotel->gallery as $gal) {
+                $gal->deletePhoto();
+            }
+        }
+        
+        if ($hotel->photo) {
+            $hotel->deletePhoto();
+        }
+        
         $hotel->delete();
-        return redirect()->route('hotels-index');
+        return redirect()
+        ->route('hotels-index');
+        
+    }
+
+    public function destroyPhoto(Photo $photo)
+    {
+        $photo->deletePhoto();
+        
+        return redirect() -> back();
+        
     }
 }

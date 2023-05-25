@@ -27,7 +27,17 @@ class CountryController extends Controller
         // ->with('info', 'Country was created'); 
     }
 
-
+    public function show (Country $country)
+    {
+        $hotels = Hotel::all();
+        $countries = Country::all();
+        return view('back.countries.show', [
+            'countries' => $countries,
+            'country' => $country,
+            'hotels' => $hotels
+        ]);
+    }
+    
     public function create()
     {
         return view('back.countries.create', [
@@ -44,14 +54,19 @@ class CountryController extends Controller
             
         ])->id;
     
-        return redirect()->route('countries-index');
+        return redirect()
+        ->route('countries-index')
+        ->with('ok', 'New country has been created');
 
     }
 
 
     public function edit(Country $country)
     {
+    
+        $countries = Country::all();
         return view('back.countries.edit', [
+            'countries' => $countries,
             'country' => $country
         ]);
     }
@@ -65,32 +80,18 @@ class CountryController extends Controller
             'country_id' =>$request->country_id
         ]);
 
-        return redirect()->route('countries-index');
+        return redirect()
+        ->route('countries-index')
+        ->with('info', 'The country has been updated');
     }
 
 
     public function destroy(Country $country)
     {
         
-        if ($country->gallery->count()) {
-            foreach ($country->gallery as $gal) {
-                $gal->deletePhoto();
-            }
-        }
-        
-        if ($country->photo) {
-            $country->deletePhoto();
-        }
-        
-        $country->delete();
-        return redirect()->route('countries-index');
-    }
-
-
-    public function destroyPhoto(Photo $photo)
-    {
-        $photo->deletePhoto();
-        return redirect()->back();
+         $country->delete();
+        return redirect()->route('countries-index')
+        ->with('info', 'The country has been deleted');
     }
 
 }

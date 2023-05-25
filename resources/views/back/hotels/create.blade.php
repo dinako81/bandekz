@@ -18,7 +18,7 @@
                         <div class="mb-3">
                             <label class="form-label">Hotel price</label>
                             <input type="text" class="form-control" name="price" value={{old('price')}}>
-                            <div class="form-text">Please add hotel title here</div>
+                            <div class="form-text">Please add hotel price here</div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Holiday duration</label>

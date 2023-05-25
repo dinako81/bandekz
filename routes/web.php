@@ -36,15 +36,12 @@ Route::name('front-')->group(function () {
 Route::prefix('countries')->name('countries-')->group(function () {
 
     Route::get('/', [C::class, 'index'])->name('index');
-    Route::get('/create', [C::class, 'create'])->name('create')->middleware('role:admin|client');
-    Route::post('/create', [C::class, 'store'])->name('store')->middleware('role:admin|client');
-    Route::get('/{country}', [C::class, 'show'])->name('show')->middleware('role:admin|client');
-    Route::get('/edit/{country}', [C::class, 'edit'])->name('edit')->middleware('role:admin|client');
-    Route::put('/edit/{country}', [C::class, 'update'])->name('update')->middleware('role:admin|client');
-    Route::delete('/delete/{country}', [C::class, 'destroy'])->name('delete')->middleware('role:admin|client');
-    Route::get('/funds/{country}', [C::class, 'editamount'])->name('editamoun')->middleware('role:admin|client');
-    Route::put('/funds/{country}', [C::class, 'donateamount'])->name('donateamount')->middleware('role:admin|client');
-    Route::delete('/delete-photo/{photo}', [C::class, 'destroyPhoto'])->name('delete-photo')->middleware('role:admin|client');
+    Route::get('/create', [C::class, 'create'])->name('create')->middleware('role:admin');
+    Route::post('/create', [C::class, 'store'])->name('store')->middleware('role:admin');
+    Route::get('/{country}', [C::class, 'show'])->name('show')->middleware('role:admin');
+    Route::get('/edit/{country}', [C::class, 'edit'])->name('edit')->middleware('role:admin');
+    Route::put('/edit/{country}', [C::class, 'update'])->name('update')->middleware('role:admin');
+    Route::delete('/delete/{country}', [C::class, 'destroy'])->name('delete')->middleware('role:admin');
    
 });
 
@@ -58,6 +55,8 @@ Route::prefix('hotels')->name('hotels-')->group(function () {
   Route::get('/edit/{hotel}', [H::class, 'edit'])->name('edit')->middleware('role:admin');
   Route::put('/edit/{hotel}', [H::class, 'update'])->name('update')->middleware('role:admin');
   Route::delete('/delete/{hotel}', [H::class, 'destroy'])->name('delete')->middleware('role:admin');
+  Route::delete('/delete-photo/{photo}', [H::class, 'destroyPhoto'])->name('delete-photo')->middleware('role:admin');
+
 });
 
 Route::prefix('cart')->name('cart-')->group(function () {

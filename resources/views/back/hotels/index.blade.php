@@ -14,6 +14,10 @@
                         <li class="list-group-item">
                             <div class="hotel-line">
                                 <div class="hotel-info">
+
+                                    <h1><i>Hotel title: {{$hotel->title}}</i></h1>
+                                    <h3>Hotel price per day: {{$hotel->price}} Eur</h3>
+                                    <h3>Duration: {{$hotel->duration}} days </h3>
                                     <div class="photo">
                                         @if($hotel->photo)
                                         <img src="{{asset('hotels-photo') .'/t_'. $hotel->photo}}">
@@ -21,10 +25,18 @@
                                         <img src="{{asset('hotels-photo') .'/no.png'}}">
                                         @endif
                                     </div>
-                                    <h2>{{$hotel->title}}</h2>
+
+                                    <div class="gallery">
+                                        <div>
+                                            @foreach($hotel->gallery as $photo)
+                                            <img src="{{asset('hotels-photo') .'/'. $photo->photo}}">
+                                            @endforeach
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                {{$hotel->getCountry()->title}} {{$hotel->getCountry()->season}}
+                                <h3>Hotel country: <a href="{{ route('countries-show', $hotel->country->id) }}">{{$hotel->country->title}}</a></h3>
 
                                 <div class="buttons">
                                     <a href="{{route('hotels-edit', $hotel)}}" class="btn btn-outline-success">Edit</a>
