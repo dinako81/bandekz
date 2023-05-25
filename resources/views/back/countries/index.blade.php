@@ -17,6 +17,7 @@
                                     <h2>Country: {{$country->title}}</h2>
                                     <h2>Season: {{$country->season}} </h2>
                                 </div>
+
                                 <div class="buttons">
                                     <a href="{{route('countries-edit', $country)}}" class="btn btn-outline-success">Edit</a>
                                     <form action="{{route('countries-delete', $country)}}" method="post">

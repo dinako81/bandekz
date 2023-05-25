@@ -22,8 +22,10 @@
                                         @endif
                                     </div>
                                     <h2>{{$hotel->title}}</h2>
-
                                 </div>
+
+                                {{$hotel->getCountry()->title}} {{$hotel->getCountry()->season}}
+
                                 <div class="buttons">
                                     <a href="{{route('hotels-edit', $hotel)}}" class="btn btn-outline-success">Edit</a>
                                     <form action="{{route('hotels-delete', $hotel)}}" method="post">

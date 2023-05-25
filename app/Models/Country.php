@@ -14,15 +14,9 @@ class Country extends Model
     protected $fillable = ['title', 'season'];
     public $timestamps = false;
 
-    public function hotel()
-    {
-        return $this->hasMany(Hotel::class);
-    }
-
-    public function gallery()
-    {
-        return $this->hasMany(Photo::class, 'hotel_id', 'id');
-    }
-
+    // public function hotel()
+    // {
+    //     return $this->hasMany(Hotel::class);
+    // }
 
 }

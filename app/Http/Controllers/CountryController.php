@@ -21,6 +21,10 @@ class CountryController extends Controller
             'countries' => $countries,
             'hotels' => $hotels
         ]);
+
+        //  return redirect()
+        // ->route('countries-index')
+        // ->with('info', 'Country was created'); 
     }
 
 

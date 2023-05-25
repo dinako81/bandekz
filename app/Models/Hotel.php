@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Hotel;
+use App\Models\Country;
 use App\Models\Photo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,11 +13,16 @@ class Hotel extends Model
 {
     use HasFactory;
     use HasFactory;
-    protected $fillable = ['title', 'price',  'duration', 'photo'];
+    protected $fillable = ['title', 'price',  'duration', 'photo', 'country_id'];
     public $timestamps = false;
     protected $casts = [
         'rates' => 'array',
     ];
+
+    public function getCountry()
+    {
+        return $this->belongsTo(Country::class, 'country_id','id');
+    }
 
 
     public function deletePhoto()
@@ -45,10 +50,14 @@ class Hotel extends Model
         return $name;
     }
 
-    public function hotel()
+    public function photo()
     {
         return $this->hasMany(Photo::class);
     }
 
+    public function gallery()
+    {
+        return $this->hasMany(Photo::class, 'hotel_id', 'id');
+    }
     
 }

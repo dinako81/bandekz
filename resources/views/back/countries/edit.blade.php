@@ -18,6 +18,20 @@
                             </div>
                         </div>
 
+                        <div class="mb-3 col-9">
+                            <label class="form-label">Seasons</label>
+                            <select class="form-select" name="season">
+                                <option value="0">Seasons list</option>
+                                {{-- <option selected>Open this select menu</option> --}}
+                                <option value="Winter">Winter</option>
+                                <option value="Spring">Spring</option>
+                                <option value="Summer">Summer</option>
+                                <option value="Autumn">Autumn</option>
+                            </select>
+                            <div class="form-text">Please select season</div>
+                        </div>
+
+
                         <div class="col-9">
                             <div class="mb-3">
                                 <label class="form-label">Country season</label>

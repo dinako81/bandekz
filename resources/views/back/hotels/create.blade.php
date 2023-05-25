@@ -27,6 +27,17 @@
                         </div>
 
                         <div class="mb-3">
+                            <label class="form-label">Country</label>
+                            <select class="form-select" name="country_id">
+                                <option value="0">Country list</option>
+                                @foreach($countries as $country)
+                                <option value="{{$country->id}}">{{$country->title}} {{$country->season}}</option>
+                                @endforeach
+                            </select>
+                            <div class="form-text">Please select country</div>
+                        </div>
+
+                        <div class="mb-3">
                             <label class="form-label">Main hotel photo</label>
                             <input type="file" class="form-control" name="photo">
                         </div>

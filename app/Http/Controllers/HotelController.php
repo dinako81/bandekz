@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Hotel;
 use App\Models\Country;
-// use App\Models\Photo;
+use App\Models\Photo;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -16,50 +17,37 @@ class HotelController extends Controller
     public function index()
     {
         $hotels = Hotel::all();
+        $photos = Photo::all();
 
         return view('back.hotels.index', [
-            'hotels' => $hotels
+            'hotels' => $hotels,
+            'photos' => $photos
         ]);
     }
 
 
     public function create()
     {
-        
+        $countries = Country::all();
         $hotels = Hotel::all();
         
         return view('back.hotels.create', [
-            'hotels' => $hotels
+            'hotels' => $hotels,
+            'countries' => $countries,
         ]);
+
+
+        // return redirect()
+        // ->route('hotels-index')
+        // ->with('info', 'Hotel was created'); 
+
     }
 
-    // public function colors(Request $request)
-    // {
-
-    //     $colorsCount = Country::where('id', $request->country)->first()->colors_count;
-
-    //     $html = view('back.hotels.colors')
-    //     ->with(['colorsCount' => $colorsCount])
-    //     ->render();
-
-    //     return response()->json([
-    //         'html' => $html,
-    //         'message' => 'OK',
-    //     ]);
-    // }
-
-    // public function colorName(Request $request, ColorNamingService $cns)
-    // {
-    //     return response()->json([
-    //         'name' => $cns->nameIt($request->color),
-    //         'message' => 'OK',
-    //     ]);
-    // }
-
+    
 
     public function store(Request $request)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'title' => 'required|min:3|max:100',
             'price' => 'required',
@@ -80,6 +68,7 @@ class HotelController extends Controller
             $name = $hotel->savePhoto($photo);
         }
         $id = Hotel::create([
+            'country_id' => $request->country_id,
             'title' => $request->title,
             'price'=> $request->price,
             'duration'=> $request->duration,
@@ -90,7 +79,9 @@ class HotelController extends Controller
             Photo::add($gallery, $id);
         }
 
-        return redirect()->route('hotels-index');
+        return redirect()
+        ->route('hotels-index');
+       
     }
 
     public function show(Hotel $hotel)

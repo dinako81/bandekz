@@ -17,8 +17,8 @@ return new class extends Migration
             $table->decimal('price', 6, 2)->unsigned();
             $table->string('photo', 200);
             $table->string('duration', 6);
-            // $table->unsignedBigInteger('country_id');
-            // $table->foreign('country_id')->references('id')->on('countries');
+            $table->unsignedBigInteger('country_id');
+            $table->foreign('country_id')->references('id')->on('countries');
         });
     }
 
