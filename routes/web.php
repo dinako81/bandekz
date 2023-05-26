@@ -21,8 +21,8 @@ use App\Http\Controllers\OrderController as O;
 
 Route::name('front-')->group(function () {
   Route::get('/', [F::class, 'index'])->name('index');
-  
-  Route::get('/hotel/{hotel}', [F::class, 'showhotel'])->name('show-hotel');
+  Route::get('/country/{country}', [F::class, 'showCountry'])->name('show-country');
+  Route::get('/hotel/{hotel}', [F::class, 'showHotel'])->name('show-hotel');
   Route::get('/my-orders', [F::class, 'orders'])->name('orders')->middleware('role:admin|client');
   Route::get('/download/{order}', [F::class, 'download'])->name('download')->middleware('role:admin|client');
   Route::put('/vote/{hotel}', [F::class, 'vote'])->name('vote')->middleware('role:admin|client');
@@ -34,8 +34,7 @@ Route::name('front-')->group(function () {
 });
 
 Route::prefix('countries')->name('countries-')->group(function () {
-
-    Route::get('/', [C::class, 'index'])->name('index');
+    Route::get('/', [C::class, 'index'])->name('index')->middleware('role:admin');
     Route::get('/create', [C::class, 'create'])->name('create')->middleware('role:admin');
     Route::post('/create', [C::class, 'store'])->name('store')->middleware('role:admin');
     Route::get('/{country}', [C::class, 'show'])->name('show')->middleware('role:admin');

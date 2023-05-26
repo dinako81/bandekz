@@ -15,13 +15,30 @@
                     <ul class="list-group">
                         @forelse($hotels as $hotel)
                         <div class="hotel-line">
-                            {{-- @include('front.tags') --}}
 
                             <div class="hotel-info">
                                 <a href="{{route('front-show-hotel', $hotel)}}">
                                     <h2>{{$hotel->title}}</h2>
                                 </a>
-                                {{-- @include('front.stars') --}}
+                                <h4><i>Duration: {{$hotel->duration}}<i></h4>
+                                <div class="photo">
+                                    @if($hotel->photo)
+                                    <img src="{{asset('hotels-photo') .'/t_'. $hotel->photo}}">
+                                    @else
+                                    <img src="{{asset('hotels-photo') .'/no.png'}}">
+                                    @endif
+                                </div>
+
+                                <div class="gallery">
+                                    <div>
+                                        @foreach($hotel->gallery as $photo)
+                                        <img src="{{asset('hotels-photo') .'/'. $photo->photo}}">
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                @include('front.stars')
+
                                 <div class="buy">
                                     <span>{{$hotel->price}} eur</span>
                                     <section class="--add--to--cart" data-url="{{route('cart-add')}}">

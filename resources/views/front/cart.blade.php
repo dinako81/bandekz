@@ -3,9 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-3">
-            @include('front.cats')
-        </div>
+
         <div class="col-9">
             <div class="card mt-5">
                 <div class="card-header">
@@ -15,11 +13,7 @@
                     <ul class="list-group">
                         @forelse($hotels as $hotel)
                         <div class="hotel-line">
-                            <div class="hotel-colors">
-                                @foreach($hotel->color as $color)
-                                <div class="color" style="background-color:{{$color->hex}};">{{$color->title}}</div>
-                                @endforeach
-                            </div>
+
                             <div class="hotel-info">
                                 <a href="{{route('front-show-hotel', $hotel)}}">
                                     <h2>{{$hotel->title}}</h2>

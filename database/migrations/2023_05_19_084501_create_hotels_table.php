@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('duration', 6);
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries');
+            $table->decimal('rate', 3, 2)->unsigned()->nullable()->default(null);
+            $table->json('rates')->default('[]');
         });
     }
 

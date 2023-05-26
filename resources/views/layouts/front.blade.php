@@ -12,7 +12,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Noto+Sans+Zanabazar+Square&family=Tillana:wght@400;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/front/sass/app.scss', 'resources/front/js/app.js'])
@@ -53,8 +53,6 @@
                             <a class="nav-link" href="{{ route('front-orders') }}">My orders</a>
                         </li>
 
-
-
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
@@ -71,7 +69,10 @@
                                 </form>
                             </div>
                         </li>
+
+
                         @endguest
+
 
 
                         <li class="nav-item">
@@ -110,8 +111,6 @@
         </nav>
 
         <main class="py-4">
-            @include('layouts.messages')
-            @include('layouts.errors')
             @yield('content')
         </main>
     </div>

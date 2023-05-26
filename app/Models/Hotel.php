@@ -14,11 +14,11 @@ class Hotel extends Model
 {
     use HasFactory;
     use HasFactory;
-    protected $fillable = ['title', 'price',  'duration', 'photo', 'country_id'];
+    protected $fillable = ['title', 'price',  'duration', 'photo', 'country_id',  'rate', 'rates'];
     public $timestamps = false;
-    // protected $casts = [
-    //     'rates' => 'array',
-    // ];
+    protected $casts = [
+        'rates' => 'array',
+    ];
 
     public function country()
     {

@@ -15,18 +15,19 @@ class FrontController extends Controller
     public function index(Request $request)
     {
         $hotels = Hotel::all();
+        $countries = Country::all();
 
         $hotels->map(function($p) use ($request) {
 
-            // //VOTES
-            // if (!$request->user()) {
-            //     $showVoteButton = false;
-            // } else {
-            //     $rates = collect($p->rates);
-            //     $showVoteButton = $rates->first(fn($r) => $r['userId'] == $request->user()->id) ? false : true;
-            // }
-            // $p->votes = count($p->rates);
-            // $p->showVoteButton = $showVoteButton;
+            //VOTES
+            if (!$request->user()) {
+                $showVoteButton = false;
+            } else {
+                $rates = collect($p->rates);
+                $showVoteButton = $rates->first(fn($r) => $r['userId'] == $request->user()->id) ? false : true;
+            }
+            $p->votes = count($p->rates);
+            $p->showVoteButton = $showVoteButton;
 
             // // TAGS
             // $tagsId = $p->hotelTag->pluck('tag_id')->all();
@@ -38,7 +39,8 @@ class FrontController extends Controller
 
 
         return view('front.index', [
-            'hotels' => $hotels
+            'hotels' => $hotels,
+            'countries' => $countries,
         ]);
     }
 
@@ -171,20 +173,19 @@ class FrontController extends Controller
     //     ]);
     // }
 
-    // public function catColors(Cat $cat)
-    // {
-    //     $hotels = $cat->hotel;
-
-    //     return view('front.cat-index', [
-    //         'hotels' => $hotels,
-    //         'cat' => $cat
-    //     ]);
-    // }
+   
 
     public function showHotel(Hotel $hotel)
     {
-        return view('front.hotel', [
+        return view('front.hotels', [
             'hotel' => $hotel,
+        ]);
+    }
+
+    public function showCountry(Country $country)
+    {
+        return view('front.countries', [
+            'country' => $country,
         ]);
     }
 
@@ -219,30 +220,30 @@ class FrontController extends Controller
         return $pdf->download('order-'.$order->id.'.pdf');
     }
 
-    // public function vote(Request $request, Hotel $hotel)
-    // {
-    //     if ($request->user()) {
-    //         $userId = $request->user()->id;
-    //         $rates = collect($hotel->rates);
+    public function vote(Request $request, Hotel $hotel)
+    {
+        if ($request->user()) {
+            $userId = $request->user()->id;
+            $rates = collect($hotel->rates);
 
-    //         if (!$rates->first(fn($r) => $r['userId'] == $userId) && $request->star) {
-    //             $stars = count($request->star);
-    //             $userRate = [
-    //                 'userId' => $userId,
-    //                 'rate' => $stars
-    //             ];
-    //             $rates->add($userRate);
-    //             $rate = round($rates->sum('rate') / $rates->count(), 2);
+            if (!$rates->first(fn($r) => $r['userId'] == $userId) && $request->star) {
+                $stars = count($request->star);
+                $userRate = [
+                    'userId' => $userId,
+                    'rate' => $stars
+                ];
+                $rates->add($userRate);
+                $rate = round($rates->sum('rate') / $rates->count(), 2);
 
-    //             $hotel->update([
-    //                 'rate' => $rate,
-    //                 'rates' => $rates,
-    //             ]);
-    //         }
+                $hotel->update([
+                    'rate' => $rate,
+                    'rates' => $rates,
+                ]);
+            }
 
-    //         return redirect()->back();
-    //     }
+            return redirect()->back();
+        }
         
-    // }
+    }
 
 }

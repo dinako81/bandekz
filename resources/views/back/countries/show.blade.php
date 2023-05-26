@@ -22,7 +22,7 @@
                                     <h2><i>Hotels:</i></h2>
                                     @foreach($hotels as $hotel)
                                     {{$country->hotel}}
-                                    @endforeach($hotels as $hotel)
+                                    @endforeach
                                 </div>
                             </div>
                         </li>
