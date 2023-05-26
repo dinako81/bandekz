@@ -11,6 +11,43 @@
                 <div class="card-header">
                     <h2>Hotels</h2>
                 </div>
+
+                <form action="{{route('hotels-index')}}" method="get">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Rūšiuoti</label>
+                                    <select class="form-select" name="sort">
+                                        @foreach($sortSelect as $value => $text)
+                                        <option value="{{$value}}" @if($value===$sort) selected @endif>{{$text}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="form-text">Pasirinkite rūšiavimo nuostatas</div>
+                                </div>
+                            </div>
+
+                            <div class="col-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Filtras</label>
+                                    <select class="form-select" name="filter">
+                                        @foreach($filterSelect as $value => $text)
+                                        <option value="{{$value}}" @if($value===$filter) selected @endif>{{$text}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-text">Pasirinkite filtravimo nuostatas</div>
+                            </div>
+
+                            <div class="col-3">
+                                <div class="sort-filter-buttons">
+                                    <button type="submit" class="btn btn-outline-dark butn2 brown">Pateikti</button>
+                                    <a href="{{route('hotels-index')}}" class="btn btn-outline-dark butn2 text-danger">Ištrinti</a>
+                                </div>
+                            </div>
+                </form>
+
+
                 <div class="card-body">
                     <ul class="list-group">
                         @forelse($hotels as $hotel)

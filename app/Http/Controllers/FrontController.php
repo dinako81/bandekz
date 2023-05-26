@@ -17,6 +17,31 @@ class FrontController extends Controller
         $hotels = Hotel::all();
         $countries = Country::all();
 
+        $sort = $request->sort ?? '';
+        $filter = $request->filter ?? '';
+
+        $hotels = match($filter) {
+            'country' => function ($country) {
+                return Hotel::whereHas('country', function ($query) use ($country) {
+                    $query->where('name', $country);
+                })->get();
+            },
+            default => Hotel::all(),
+        };
+
+        $hotels = match($sort) {
+            'price_0-50' => $hotels->orderBy('price'),
+            'price_51-100' => $hotels->orderBy('price'),
+            'price_101-500' => $hotels->orderBy('price'),
+            'price_501-...' => $hotels->orderBy('price'),
+            default => $hotels
+        };
+
+        $request->session()->put('last-hotelt-view', [
+            'sort' => $sort,
+            'filter' => $filter
+        ]);
+
         $hotels->map(function($p) use ($request) {
 
             //VOTES
@@ -36,11 +61,13 @@ class FrontController extends Controller
 
         });
 
-
-
         return view('front.index', [
             'hotels' => $hotels,
             'countries' => $countries,
+            'sortSelect' => Hotel::SORT,
+            'sort' => $sort,
+            'filterSelect' => Hotel::FILTER,
+            'filter' => $filter,
         ]);
     }
 
@@ -191,7 +218,13 @@ class FrontController extends Controller
 
     public function orders(Request $request)
     {
+
+      
+        
         $orders = $request->user()->order;
+
+        // $orders = Order::all();
+
 
         return view('front.orders', [
             'orders' => $orders,

@@ -14,17 +14,17 @@ use Intervention\Image\ImageManagerStatic as Image;
 class HotelController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $hotels = Hotel::all();
         $photos = Photo::all();
 
         return view('back.hotels.index', [
             'hotels' => $hotels,
-            'photos' => $photos
+            'photos' => $photos,
+          
         ]);
     }
-
 
     public function create()
     {
@@ -36,10 +36,7 @@ class HotelController extends Controller
             'countries' => $countries,
         ]);
 
-
-        // return redirect()
-        // ->route('hotels-index')
-        // ->with('info', 'Hotel was created'); 
+        with('info', 'Hotel was created'); 
 
     }
 

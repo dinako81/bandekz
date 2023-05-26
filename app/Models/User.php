@@ -48,8 +48,8 @@ class User extends Authenticatable
         10 => 'client'
     ];
 
-    public function hotel()
+    public function order()
     {
-        return $this->hasMany(Hotel::class);
+        return $this->hasMany(Order::class);
     }
 }

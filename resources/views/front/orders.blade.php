@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-3">
+        {{-- <div class="col-3">
             @include('front.countries')
-        </div>
+        </div> --}}
         <div class="col-9">
             <div class="card mt-5">
                 <div class="card-header">
