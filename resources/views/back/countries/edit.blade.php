@@ -9,7 +9,7 @@
                     <h1>Add Country</h1>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('countries-store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('countries-update', $country)}}" method="post" enctype="multipart/form-data">
                         <div class="col-9">
                             <div class="mb-3">
                                 <label class="form-label">Country title</label>
@@ -20,7 +20,7 @@
 
                         <div class="mb-3 col-9">
                             <label class="form-label">Seasons</label>
-                            <select class="form-select" name="season">
+                            <select class="form-select" name="season" value={{old('season', $country->season)}}>
                                 <option value="0">Seasons list</option>
                                 {{-- <option selected>Open this select menu</option> --}}
                                 <option value="Winter">Winter</option>
@@ -31,17 +31,9 @@
                             <div class="form-text">Please select season</div>
                         </div>
 
-
-                        <div class="col-9">
-                            <div class="mb-3">
-                                <label class="form-label">Country season</label>
-                                <input type="text" class="form-control" name="season" value={{old('season', $country->season)}}>
-                                <div class="form-text">Please add country season</div>
-                            </div>
-                        </div>
-
                         <button type="submit" class="btn btn-primary">Submit</button>
                         @csrf
+                        @method('put')
                     </form>
                 </div>
             </div>

@@ -20,7 +20,7 @@
                                     <div class="front-order-number">#{{$order->id}}</div>
                                     <div class="front-order-status">{{$status[$order->status]}}</div>
                                     @if($order->status == 2)
-                                    <a href="{{route('front-download', $order)}}">Download</a>
+                                    <a href="{{route('front-download', $order)}}">Download invoce</a>
                                     @endif
                                 </div>
                                 <div class="front-order-hotels">
@@ -28,11 +28,11 @@
                                         @foreach($order->hotels as $hotel)
                                         <li class="list-group-item">
                                             <div class="front-order-hotels-list">
-                                                <span>{{$hotel['title']}}</span>
+                                                <span>Hotel title: {{$hotel['title']}}</span>
                                                 <i>{{$hotel['price']}} eur</i>
                                                 X
-                                                <i>{{$hotel['count']}}</i>
-                                                <b>{{$hotel['total']}} eur</b>
+                                                <i>Holyday duration: {{$hotel['count']}} days </i>
+
                                             </div>
                                         </li>
                                         @endforeach

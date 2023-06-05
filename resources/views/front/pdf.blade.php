@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lt">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,18 +28,24 @@
     </style>
 
 </body>
-
+<h1> Invoice</h1>
 <table>
-    @foreach($hotels as $hotel)
-    <tr>
-        @foreach($hotel->color as $color)
-        <td style="background-color:{{$color->hex}};">
-            {{$color->title}}
-        </td>
-        @endforeach
-        {!!str_repeat('<td></td>', 5 - $hotel->color->count())!!}
-    </tr>
+
+    @foreach($order->hotels as $hotel)
+    <div class="front-order-hotels-list">
+        <span>Hotel Title: {{$hotel['title']}}</span>
+        <i>Price: {{$hotel['price']}} eur</i>
+        X
+        <i>Holiday duration: {{$hotel['count']}} days </i>
+
+    </div>
+
     @endforeach
+
+    <div class="front-order-hotels-list">
+        <b>Total price: {{$order->price}} eur</b>
+    </div>
+
 
 </table>
 

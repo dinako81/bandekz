@@ -83,7 +83,12 @@ class HotelController extends Controller
 
     public function show(Hotel $hotel)
     {
-        //
+        $hotels = Hotel::all();
+
+        return view('back.hotels.show', [
+            'countries' => $countries,
+            'hotels' => $hotels
+        ]);
     }
 
 

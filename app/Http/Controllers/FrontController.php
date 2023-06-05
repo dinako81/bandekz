@@ -10,6 +10,7 @@ use App\Models\Order;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
+
 class FrontController extends Controller
 {
     public function index(Request $request)
@@ -234,16 +235,13 @@ class FrontController extends Controller
 
     public function download(Order $order)
     {
+        $hotelNames = array_map(fn($h) => $h['title'], $order->hotels);
+        $hotels = Hotel::where('title', $hotelNames)->get();
 
-
-        $hotelNames = array_map(fn($p) => $p['title'], $order->hotels);
-
-        $hotels = Hotel::whereIn('title', $hotelNames)->get();
-
-        return view('front.pdf',[
-                'order' => $order,
-                'hotels' => $hotels,
-        ]);
+        // return view('front.pdf',[
+        //         'order' => $order,
+        //         'hotels' => $hotels,
+        // ]);
 
         $pdf = Pdf::loadView('front.pdf',[
             'order' => $order,
